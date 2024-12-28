@@ -19,7 +19,6 @@ from torchsummary import summary
 from tqdm import tqdm
 import torch.nn.functional as F
 from math import exp
-# from stegtrans import stegDcnv4
 from stegTransx import stegTransX
 from compress import jpeg_compress_batch
 from critic import *
