@@ -1,7 +1,7 @@
 lr = 2e-4
-epochs =6000
+epochs =8000
 lamda1 = 1
-lamda2 = 2
+lamda2 = 1
 
 # Train:
 train_batch_size = 2
@@ -30,14 +30,14 @@ format_val = 'png'
 # format_val = 'png'
 
 # Saving checkpoints:
-HMODEL_PATH = '/home/pod/shared-nvme/StegTransx/checkpoint4'
-RMODEL_PATH = '/home/pod/shared-nvme/StegTransx/checkpoint4'
+HMODEL_PATH = '/home/pod/shared-nvme/StegTransx/checkpoint'
+RMODEL_PATH = '/home/pod/shared-nvme/StegTransx/checkpoint'
 HMODEL_PATH_100 = '/home/pod/shared-nvme/StegTransx/100_checkpoint'
 RMODEL_PATH_100 = '/home/pod/shared-nvme/StegTransx/100_checkpoint'
 # load_checkpoint
 is_load=False
-Hload='/home/pod/shared-nvme/StegTransx/checkpoint4/Hmodel.pth'
-Rload='/home/pod/shared-nvme/StegTransx/checkpoint4/Rmodel.pth'
+Hload='/home/pod/shared-nvme/StegTransx/checkpoint/Hmodel.pth'
+Rload='/home/pod/shared-nvme/StegTransx/checkpoint/Rmodel.pth'
 
 # Hload='/home/pod/shared-nvme/StegTransx/checkpoint_best/3/Hmodel.pth'
 # Rload='/home/pod/shared-nvme/StegTransx/checkpoint_best/3/Rmodel.pth'
