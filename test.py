@@ -19,7 +19,7 @@ from torchsummary import summary
 from tqdm import tqdm
 import torch.nn.functional as F
 from math import exp
-from stegConv import stegConv
+from stegTransx import stegTransx 
 from torchvision import models
 
 # 导入autocast和GradScaler
@@ -64,8 +64,8 @@ def main():
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
     # 初始化模型
-    Hnet = stegConv(in_channels=6, out_channels=3)
-    Rnet = stegConv(in_channels=3, out_channels=3)
+    Hnet = stegTransx (in_channels=6, out_channels=3)
+    Rnet = stegTransx (in_channels=3, out_channels=3)
 
     Hnet.to(device)
     Rnet.to(device)
