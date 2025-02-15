@@ -152,6 +152,7 @@ def main():
                     R_input = jpeg_compress_batch(H_output,quality=c.quality)
                 else:
                     R_input=H_output
+                R_input = R_input.clamp(0, 1)
                 R_output = Rnet(R_input)
 
 
