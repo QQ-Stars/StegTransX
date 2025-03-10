@@ -91,6 +91,17 @@ dataset/
 - 确保使用兼容的CUDA版本（CUDA 12.0）
 - 建议使用高性能GPU进行训练
 
+## 参考项目
+
+本项目在实现过程中参考了以下优秀的开源项目：
+
+1. **StegFormer**: [aoli-gei/StegFormer](https://github.com/aoli-gei/StegFormer)
+
+2. **HiNet**: [TomTomTommi/HiNet](https://github.com/TomTomTommi/HiNet)
+
+3. **DeepMIH**: [TomTomTommi/DeepMIH](https://github.com/TomTomTommi/DeepMIH)
+
+4. **DAH-Net**: [zhangle408/Deep-adaptive-hiding-network](https://github.com/zhangle408/Deep-adaptive-hiding-network)
 
 ## 许可证
 
