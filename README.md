@@ -30,7 +30,7 @@ cd StegTransX
 
 2. 创建并激活虚拟环境（推荐）：
 ```bash
-conda create -n stegtransx python=3.8
+conda create -n stegtransx python=3.9
 conda activate stegtransx
 ```
 
