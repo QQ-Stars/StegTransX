@@ -24,7 +24,7 @@ matplotlib>=3.5.0
 
 1. 克隆仓库：
 ```bash
-git clone https://github.com/yourusername/StegTransX.git
+git clone https://github.com/QQ-Stars/StegTransX.git
 cd StegTransX
 ```
 
