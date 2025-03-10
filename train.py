@@ -56,8 +56,8 @@ def main():
     writer = SummaryWriter(logdir=c.t_log, comment='tt', filename_suffix="steg")
 
     # 初始化模型
-    Hnet = stegDcnv4(in_channels=6, out_channels=3)
-    Rnet = stegDcnv4(in_channels=3, out_channels=3)
+    Hnet = stegTransX(in_channels=6, out_channels=3)
+    Rnet = stegTransX(in_channels=3, out_channels=3)
 
     Hnet.to(device)
     Rnet.to(device)
