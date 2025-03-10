@@ -54,7 +54,7 @@ StegTransX/
 ├── test.py           # 测试脚本
 ├── critic.py         # 评价指标
 ├── mutil_train_x.py           # 多图隐藏训练脚本
-├── compress           # 压缩模块函数
+├── compress.py           # 压缩模块函数
 ├── dataset.py             # 数据集脚本
 └── config.py          # 配置文件
 ```
@@ -68,4 +68,4 @@ StegTransX/
 
 ## 许可证
 
-本项目采用 MIT 许可证。详情请见 [LICENSE](LICENSE) 文件。 
+本项目采用 Apache License 2.0 许可证。详情请见 [LICENSE](LICENSE) 文件。 
