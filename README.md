@@ -1,6 +1,6 @@
 # StegTransX: A Lightweight Deep Steganography Method for High-Capacity Hiding and JPEG Compression Resistance
 
-StegTransX是一个基于深度学习的图像隐写算法实现，基于论文 "StegTransX: A Lightweight Deep Steganography Method for High-Capacity Hiding and JPEG Compression Resistance"。
+StegTransX是一个基于深度学习的图像隐写算法实现, "StegTransX: A Lightweight Deep Steganography Method for High-Capacity Hiding and JPEG Compression Resistance"。
 
 ## 环境要求
 
