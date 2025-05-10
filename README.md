@@ -108,16 +108,15 @@ dataset/
 ## 引用
 如果您觉得对您的工作有帮助，请引用
 
-@article{duan2025stegtransx,
-  title     = {StegTransX: A lightweight deep steganography method for high-capacity hiding and JPEG compression resistance},
-  author    = {Duan, Xintao and Wang, Zhao and Li, Sen and Qin, Chuan},
-  journal   = {Information Sciences},
-  volume    = {716},
-  pages     = {122264},
-  year      = {2025},
-  issn      = {0020-0255},
-  doi       = {10.1016/j.ins.2025.122264},
-  url       = {https://www.sciencedirect.com/science/article/pii/S0020025525003962}
+```bibtex
+@inproceedings{ke2024stegformer,
+  title={StegFormer: Rebuilding the Glory of Autoencoder-Based Steganography},
+  author={Ke, Xiao and Wu, Huanqi and Guo, Wenzhong},
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={38},
+  number={3},
+  pages={2723--2731},
+  year={2024}
 }
 
 
