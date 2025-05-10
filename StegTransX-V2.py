@@ -10,7 +10,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from timm.models.layers import DropPath
 from mmcv.cnn.bricks import ConvModule, build_activation_layer, build_norm_layer
-from spp import SPP,sppELAN
 from einops import rearrange
 import typing as t
 import numpy as np
