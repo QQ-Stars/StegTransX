@@ -5,15 +5,92 @@ import math
 from timm.models.layers import DropPath
 import torch.utils.checkpoint as checkpoint
 import torch.nn.functional as F
-from ppm import RPPM
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from timm.models.layers import DropPath
 from mmcv.cnn.bricks import ConvModule, build_activation_layer, build_norm_layer
-from spp import SPP,sppELAN
 from einops import rearrange
 import typing as t
+
+class Conv(nn.Module):
+    """标准的卷积模块，包含卷积、归一化和激活函数。"""
+    def __init__(self, in_channels, out_channels, kernel_size, stride=1, groups=1, activation=True):
+        super(Conv, self).__init__()
+        padding = (kernel_size - 1) // 2  # 计算填充大小
+        self.conv = nn.Conv2d(
+            in_channels, out_channels, kernel_size, stride,
+            padding=padding, groups=groups, bias=False
+        )
+        self.bn = nn.BatchNorm2d(out_channels)
+        self.activation = nn.SiLU() if activation else nn.Identity()
+
+    def forward(self, x):
+        return self.activation(self.bn(self.conv(x)))
+
+class ELAN(nn.Module):
+    """ELAN 结构的实现。"""
+    def __init__(self, in_channels, out_channels):
+        super(ELAN, self).__init__()
+        hidden_channels = out_channels // 2
+
+        self.branch1_conv1 = Conv(in_channels, hidden_channels, kernel_size=1)
+        self.branch1_conv2 = Conv(hidden_channels, hidden_channels, kernel_size=3)
+
+        self.branch2_conv1 = Conv(in_channels, hidden_channels, kernel_size=1)
+        self.branch2_conv2 = Conv(hidden_channels, hidden_channels, kernel_size=3)
+
+        self.concat_conv = Conv(hidden_channels * 2, out_channels, kernel_size=1)
+
+    def forward(self, x):
+        b1 = self.branch1_conv1(x)
+        b1 = self.branch1_conv2(b1)
+
+        b2 = self.branch2_conv1(x)
+        b2 = self.branch2_conv2(b2)
+
+        concat = torch.cat([b1, b2], dim=1)
+        out = self.concat_conv(concat)
+        return out
+
+class SPP(nn.Module):
+    """空间金字塔池化（SPP）层的实现。"""
+    def __init__(self, in_channels):
+        super(SPP, self).__init__()
+        hidden_channels = in_channels // 2
+        self.conv1 = Conv(in_channels, hidden_channels, kernel_size=1)
+
+        self.pool1 = nn.MaxPool2d(kernel_size=5, stride=1, padding=2)
+        self.pool2 = nn.MaxPool2d(kernel_size=9, stride=1, padding=4)
+        self.pool3 = nn.MaxPool2d(kernel_size=13, stride=1, padding=6)
+
+        self.conv2 = Conv(hidden_channels * 4, in_channels, kernel_size=1)
+
+    def forward(self, x):
+        x = self.conv1(x)
+        x1 = self.pool1(x)
+        x2 = self.pool2(x)
+        x3 = self.pool3(x)
+        x = torch.cat([x, x1, x2, x3], dim=1)
+        x = self.conv2(x)
+        return x
+
+class sppELAN(nn.Module):
+    """sppELAN 模块的完整实现。"""
+    def __init__(self, in_channels, out_channels):
+        super(sppELAN, self).__init__()
+        self.initial_conv = Conv(in_channels, in_channels, kernel_size=1)
+
+        self.spp = SPP(in_channels)
+
+        self.elan = ELAN(in_channels, out_channels)
+
+    def forward(self, x):
+        x1 = self.initial_conv(x)
+        x2 = self.spp(x1)
+        x3 = self.elan(x2) + x2
+        return x3
+
 
 class Downsampling(nn.Module):
     """
