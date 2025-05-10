@@ -118,7 +118,7 @@ dataset/
   issn = {0020-0255},
   doi = {https://doi.org/10.1016/j.ins.2025.122264},
   author = {Xintao Duan and Zhao Wang and Sen Li and Chuan Qin}
-}
+}```
 
 
 ## 许可证
