@@ -8,18 +8,6 @@ The official pytorch implementation of the paper [StegTransX: A lightweight deep
 
 Image steganography refers to the concealment of multiple secret images within a cover image of the same resolution. This technique must ensure not only sufficient security but also high capacity and robustness. In this paper, we introduce StegTransX, which is a lightweight deep steganography framework that combines local and global modeling to improve data embedding performance. StegTransX can hide one or multiple secret images within a cover image of the same size while maintaining the visual quality of the stego image and the reconstruction quality of the secret images. Furthermore, considering that images typically undergo compression during channel transmission, we introduce a JPEG compression attack module to increase the robustness of secret information recovery under realistic compression scenarios in actual information transmission. Additionally, we propose an effective multiscale loss and constraint loss to preserve the quality of the stego image and improve the reconstruction quality of the secret images. The experimental results demonstrate that StegTransX outperforms existing state-of-the-art (SOTA) steganography models. In the case of single-image hiding, the PSNRs of both the cover/stego images and the secret/recovered images improved by more than 4 dB. Moreover, StegTransX also outperforms the state-of-the-art (SOTA) steganography models in multi-image hiding and JPEG compression resistance.
 
-## 参考项目
-
-本项目在实现过程中参考了以下优秀的开源项目：
-
-1. **StegFormer**: [aoli-gei/StegFormer](https://github.com/aoli-gei/StegFormer)
-
-2. **HiNet**: [TomTomTommi/HiNet](https://github.com/TomTomTommi/HiNet)
-
-3. **DeepMIH**: [TomTomTommi/DeepMIH](https://github.com/TomTomTommi/DeepMIH)
-
-4. **DAH-Net**: [zhangle408/Deep-adaptive-hiding-network](https://github.com/zhangle408/Deep-adaptive-hiding-network)
-
 ## Citation
 
 If you find this work helps you, please cite:
@@ -37,6 +25,3 @@ If you find this work helps you, please cite:
 }
 ```
 
-## License
-
-本项目采用 Apache License 2.0 许可证。详情请见 [LICENSE](LICENSE) 文件。 
