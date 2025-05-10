@@ -29,7 +29,111 @@ def set_seed(seed):
     torch.manual_seed(seed)
     torch.cuda.manual_seed_all(seed)
 
-set_seed(2024)  # 将42替换为您喜欢的任何种子值
+set_seed(2024) 
+
+class L1_Charbonnier_loss(torch.nn.Module):
+    """L1 Charbonnierloss."""
+
+    def __init__(self):
+        super(L1_Charbonnier_loss, self).__init__()
+        self.eps = 1e-6
+
+    def forward(self, X, Y):
+        diff = torch.add(X, -Y)
+        error = torch.sqrt(diff * diff + self.eps)
+        loss = torch.mean(error)
+        return loss
+
+class LaplacianPyramidLoss(nn.Module):
+    def __init__(self, num_levels=3, kernel_size=5, sigma=1.0):
+        """
+        初始化多尺度拉普拉斯金字塔损失函数
+        :param num_levels: 金字塔的层数
+        :param kernel_size: 高斯模糊核的大小
+        :param sigma: 高斯模糊的标准差
+        """
+        super(LaplacianPyramidLoss, self).__init__()
+        self.num_levels = num_levels
+        self.kernel = self.create_gaussian_kernel(kernel_size, sigma)
+        self.padding = kernel_size // 2
+        self.charbonnier_loss = L1_Charbonnier_loss()
+
+    def create_gaussian_kernel(self, kernel_size, sigma):
+        """
+        创建一个高斯模糊核
+        :param kernel_size: 核的大小
+        :param sigma: 高斯分布的标准差
+        :return: 高斯核
+        """
+        # 创建1D高斯核
+        ax = torch.arange(-kernel_size // 2 + 1., kernel_size // 2 + 1.)
+        xx, yy = torch.meshgrid([ax, ax], indexing='ij')  # 使用 'ij' 以兼容新版 PyTorch
+        kernel = torch.exp(-(xx**2 + yy**2) / (2. * sigma**2))
+        kernel = kernel / torch.sum(kernel)
+        kernel = kernel.view(1, 1, kernel_size, kernel_size)
+        return kernel
+
+    def gaussian_blur(self, img):
+        """
+        对图像进行高斯模糊
+        :param img: 输入图像，形状 [batch_size, channels, height, width]
+        :return: 模糊后的图像
+        """
+        channels = img.shape[1]
+        kernel = self.kernel.to(img.device)
+        kernel = kernel.repeat(channels, 1, 1, 1)
+        return F.conv2d(img, kernel, padding=self.padding, groups=channels)
+
+    def build_pyramid(self, img):
+        """
+        构建拉普拉斯金字塔
+        :param img: 输入图像，形状 [batch_size, channels, height, width]
+        :return: 拉普拉斯金字塔列表
+        """
+        gaussian_pyramid = [img]
+        for _ in range(self.num_levels):
+            img = self.gaussian_blur(img)
+            img = F.interpolate(img, scale_factor=0.5, mode='bilinear', align_corners=False, recompute_scale_factor=True)
+            gaussian_pyramid.append(img)
+        
+        laplacian_pyramid = []
+        for i in range(self.num_levels):
+            current = gaussian_pyramid[i]
+            next_level = gaussian_pyramid[i + 1]
+            # 上采样回原始尺寸
+            next_level_up = F.interpolate(next_level, size=current.shape[2:], mode='bilinear', align_corners=False)
+            # 计算拉普拉斯层
+            laplacian = current - self.gaussian_blur(next_level_up)
+            laplacian_pyramid.append(laplacian)
+        return laplacian_pyramid
+
+    def forward(self, pred, target):
+        """
+        计算多尺度拉普拉斯金字塔损失
+        :param pred: 生成图像，形状 [batch_size, channels, height, width]
+        :param target: 目标图像，形状 [batch_size, channels, height, width]
+        :return: 多尺度拉普拉斯金字塔损失值
+        """
+        pred_pyramid = self.build_pyramid(pred)
+        target_pyramid = self.build_pyramid(target)
+        
+        loss = 0.0
+        for l_pred, l_target in zip(pred_pyramid, target_pyramid):
+            loss += self.charbonnier_loss(l_pred, l_target)
+        return loss
+
+class Restrict_Loss(nn.Module):
+
+    def __init__(self):
+        super().__init__()
+
+    def forward(self, X):
+        over_upper = torch.relu(X - 1)
+        below_lower = torch.relu(-X)
+        error = over_upper + below_lower
+        loss = torch.mean(error ** 2)  # 使用平方惩罚
+        return loss
+
 
 
 
