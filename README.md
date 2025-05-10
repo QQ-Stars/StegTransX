@@ -2,7 +2,7 @@
 
 **Xintao Duan , Zhao Wang , Sen Li and Chuan Qin**
 
-The official pytorch implementation of the paper  [StegTransX: A Lightweight Deep Steganography Method for High-Capacity Hiding and JPEG Compression Resistance]([StegTransX: A lightweight deep steganography method for high-capacity hiding and JPEG compression resistance - ScienceDirect](https://www.sciencedirect.com/science/article/abs/pii/S0020025525003962)).
+The official pytorch implementation of the paper [StegTransX: A lightweight deep steganography method for high-capacity hiding and JPEG compression resistance](https://www.sciencedirect.com/science/article/abs/pii/S0020025525003962)).
 
 ## Abstract
 
