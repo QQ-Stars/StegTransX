@@ -108,18 +108,8 @@ dataset/
 ## 引用
 如果您觉得对您的工作有帮助，请引用
 
-@article{DUAN2025122264,
-title = {StegTransX: A lightweight deep steganography method for high-capacity hiding and JPEG compression resistance},
-journal = {Information Sciences},
-volume = {716},
-pages = {122264},
-year = {2025},
-issn = {0020-0255},
-doi = {https://doi.org/10.1016/j.ins.2025.122264},
-url = {https://www.sciencedirect.com/science/article/pii/S0020025525003962},
-author = {Xintao Duan and Zhao Wang and Sen Li and Chuan Qin},
-}
-}
+**Duan, X.**, **Wang, Z.**, **Li, S.**, & **Qin, C.** (2025). StegTransX: A lightweight deep steganography method for high-capacity hiding and JPEG compression resistance. *Information Sciences, 716*, 122264. [https://doi.org/10.1016/j.ins.2025.122264](https://doi.org/10.1016/j.ins.2025.122264)
+
 
 ## 许可证
 
