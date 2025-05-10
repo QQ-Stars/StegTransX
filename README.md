@@ -109,14 +109,15 @@ dataset/
 如果您觉得对您的工作有帮助，请引用
 
 ```bibtex
-@inproceedings{ke2024stegformer,
-  title={StegFormer: Rebuilding the Glory of Autoencoder-Based Steganography},
-  author={Ke, Xiao and Wu, Huanqi and Guo, Wenzhong},
-  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
-  volume={38},
-  number={3},
-  pages={2723--2731},
-  year={2024}
+@article{DUAN2025122264,
+  title = {StegTransX: A lightweight deep steganography method for high-capacity hiding and JPEG compression resistance},
+  journal = {Information Sciences},
+  volume = {716},
+  pages = {122264},
+  year = {2025},
+  issn = {0020-0255},
+  doi = {https://doi.org/10.1016/j.ins.2025.122264},
+  author = {Xintao Duan and Zhao Wang and Sen Li and Chuan Qin}
 }
 
 
