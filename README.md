@@ -13,15 +13,13 @@ Image steganography refers to the concealment of multiple secret images within a
 If you find this work helps you, please cite:
 
 ```bibtex
-@article{DUAN2025122264,
-  title = {StegTransX: A lightweight deep steganography method for high-capacity hiding and JPEG compression resistance},
-  journal = {Information Sciences},
-  volume = {716},
-  pages = {122264},
-  year = {2025},
-  issn = {0020-0255},
-  doi = {https://doi.org/10.1016/j.ins.2025.122264},
-  author = {Xintao Duan and Zhao Wang and Sen Li and Chuan Qin}
+@article{duan2025stegtransx,
+  title={StegTransX: A Lightweight Deep Steganography Method for High-Capacity Hiding and JPEG Compression Resistance},
+  author={Duan, Xintao and Wang, Zhao and Li, Sen and Qin, Chuan},
+  journal={Information Sciences},
+  pages={122264},
+  year={2025},
+  publisher={Elsevier}
 }
 ```
 
